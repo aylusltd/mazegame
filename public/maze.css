@@ -1,0 +1,115 @@
+div#modal-screen{
+    position: absolute;
+    top:0;
+    left:0;
+    background-color:rgba(0,0,0,0.5);
+    width:100%;
+    height: 100%;
+    z-index: 100;
+}
+div#enter{
+    position: absolute;
+    top:30%;
+    left:30%;
+    background-color:rgba(100,100,255,1);
+    width:10%;
+    height: 10%;
+    padding:10%;
+    color:#EEEEEE;
+}
+
+div#room{
+    position: absolute;
+    top:0%;
+    left:0%;
+    width:80%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+div#chat{
+    position: absolute;
+    top:0%;
+    left:80%;
+    width:20%;
+    height: 80%;
+}
+div#map{
+    position: absolute;
+    top:80%;
+    left:80%;
+    width:20%;
+    height: 20%;
+}
+
+div#chat-input{
+    position: absolute;
+    bottom:0.5em;
+    right:0.5em;
+    width:100%;
+    height:1em;
+    padding: 0.5em;
+}
+
+div#chat-input *{
+    position: absolute;
+    height:100%;
+    top:0;
+}
+
+div#chat-input input{
+    left:0;
+    width:90%;
+}
+div#chat-input button{
+    right: 0.5em;
+    width: 6em;
+    height: 120%;
+}
+div#roomContainer {
+    perspective:1000px;
+    perspective-origin: 500px 250px;
+}
+.wall {
+    position: absolute;
+    height:500px;
+    width: 1000px;
+    top:0;
+    left:0;
+    background-color:#dddddd;
+    
+}
+.north.wall{
+    background-color:#dd0000;
+    transform: translateZ(-500px);
+}
+.east.wall{
+    background-color:#00dd00;
+    transform:rotateY(90deg) translateZ(500px);
+}
+.west.wall{
+    background-color:#0000dd;
+    transform:rotateY(-90deg) translateZ(500px);
+}
+.south.wall{
+    transform:rotateY(180deg) translateZ(-500px);
+}
+
+.door {
+    position: absolute;
+    height:80%;
+    width: 18%;
+    bottom:0;
+    left:41%;
+    background-color:#dddd99;
+    cursor: pointer;
+}
+
+div#error-message{
+    height:20%;
+    width:20%;
+    top:40%;
+    left:40%;
+    text-align: center;
+    background-color: red;
+    color:white;
+}

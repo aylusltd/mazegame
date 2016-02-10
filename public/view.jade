@@ -1,0 +1,22 @@
+doctype html
+html(lang="en")
+    head
+        title="Socket Maze"
+        script(src="/socket.io/socket.io.js")
+        link(rel="stylesheet", href="maze.css")
+    body
+        div#modal-screen
+            div#enter
+                span Enter a Username:
+                input#userName(type="text")
+                button#enterButton Enter
+        div#roomContainer
+            div#room Room Loading
+        div#chat 
+            div#chat-display
+                div Chat loading
+            div#chat-input
+                input(type="text")
+                button#send Send
+        div#map Map loading
+        script(src="/socketMazeClient.js")

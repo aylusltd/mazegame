@@ -1,55 +1,115 @@
-import Model from 'Model';
+var Model = require('./Model');
 
 var model = new Model();
 
-export default function Controller(io){
+module.exports = function Controller(io, app){
 
-    model.members = [];    
+    model.members = [];
+    model.rooms = {};
+    model.players = {};
 
     io.on('connection', function(socket) {
-        var id = members.length;
-        members.push(socket);
+        var id = model.members.length;
+        var exits = {
+            n: {
+                name : 'North'
+            },
+            e:{
+                name: 'East'
+            },
+            w:{
+                name: 'West'
+            },
+            s:{
+                name: 'South'
+            }
+        }
+        model.members.push(socket);
         socket.game={
             history : [],
             state: {}
         }
 
         socket.on('enter', function(data){
-            socket.game.name = data.userName;
+            console.log('enter received');
+            var bounds,
+                x,
+                y;
 
-        })
+            if(model.players[data.userName]) {
+                console.log('Bad User Name')
+                socket.emit('error', 'Username taken');
+            } else {
+                
+                socket.game.name = data.userName;
+                model.players[data.userName] = socket;
 
-        socket.on('north', function(){
+                bounds = model.getBounds();
+                x = Math.floor(Math.random()*bounds.x);
+                y = Math.floor(Math.random()*bounds.y);
+                console.log('Accepting player '+ data.userName + ' into room at ' + x + ', ' + y);
+                socket.game.state.currentRoom = model.getRoom({x:x, y: y}) || model.generate({x:x, y: y});
+                socket.emit('renderRoom', socket.game.state.currentRoom);
+                socket.emit('message', {global:false, system: true, message:'Welcome to the maze'});
+            }
+        });
+    
+        socket.on('move', function move(data){
             var currentRoom = socket.game.state.currentRoom;
             var x = currentRoom.x;
             var y = currentRoom.y;
-
-            if(currentRoom.exits.n) {
-                socket.leave(currentRoom.roomId);
-                if(model.maze[x][y+1]){
-
-                } else {
-                    model.generate({
-                        x:x, 
-                        y: y+1,
-                        mustHaveExits : {
-                            s:true
-                        }
-                    })
-                }
-                socket.join(currentRoom.roomId);
-            } else {
-                socket.send('error', 'Can\'t go north from here');
+            var direction = data.direction;
+            var newX, newY;
+            var opts = {};
+            switch(direction) {
+                case 'n':
+                    newY = y+1;
+                    newX = x;
+                    break;
+                case 'e':
+                    newY = y;
+                    newX = x+1;
+                    break;
+                case 'w':
+                    newY = y;
+                    newX = x-1;
+                    break;
+                case 's':
+                    newY = y-1;
+                    newX = x;
+                    break;
+                default:
+                    socket.emit('userError', 'invalid direction');
             }
-        });
-
-        socket.on('south', function(){
-
-        });
-        socket.on('east', function(){
-
-        });
-        socket.on('west', function(){
+            if(currentRoom.exits[direction] && newX >=0 && newY>=0) {
+                socket.leave(currentRoom.roomId);
+                if(model.rooms[currentRoom.roomId]) {
+                    model.rooms[currentRoom.roomId]--;
+                    model.toDisk({x:x, y:y});
+                }
+                currentRoom = model.getRoom({x:newX, y: newY});
+                if(!currentRoom) {
+                    currentRoom = model.generate({x:newX, y: newY});
+                }
+               
+                if(!socket.game.history[x])
+                    socket.game.history[x] = [];
+                socket.game.state.currentRoom = currentRoom;
+                socket.game.history[x][y] = {
+                    exits : currentRoom.exits,
+                    visited : true
+                };
+                socket.join(currentRoom.roomId);
+                model.rooms[currentRoom.roomId]++;
+                socket.emit('renderRoom', currentRoom);
+                socket.emit('displayMap', socket.game.history);
+            } else {
+                console.log('Attempted invalid move');
+                console.log('Can\'t go ' + exits[direction].name + ' from here')
+                console.log('x: ' + x + ', y: ' + y);
+                console.log(currentRoom);
+                socket.emit('userError', 'Can\'t go ' + exits[direction].name + ' from here');
+            }
 
         });
 
@@ -76,13 +136,19 @@ export default function Controller(io){
 
         socket.on('disconnect', function(){
             delete model.members[id];
+            delete model.players[socket.game.name];
             model.members = model.members.filter(function(m){return !!m});
-            io.emit('members', members);
+            io.emit('members', model.members);
         });
     });
 
     this.initialize = function initialize(){
-        app.listen(80);
+        app.listen(8080);
+        model.generate({
+            x:0,
+            y:0
+        });
+        console.log('running');
     }
 }
 
