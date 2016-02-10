@@ -69,7 +69,7 @@ div#roomContainer {
     perspective:1000px;
     perspective-origin: 500px 250px;
 }
-.wall {
+.wall, .floor, .ceiling {
     position: absolute;
     height:500px;
     width: 1000px;
@@ -92,6 +92,19 @@ div#roomContainer {
 }
 .south.wall{
     transform:rotateY(180deg) translateZ(-500px);
+}
+.floor{
+    transform:rotateX(-90deg);
+    background-color: brown;
+}
+.ceiling{
+    transform:rotateX(90deg) translateZ(500px);
+    background-color: lightblue;
+}
+
+.floor, .ceiling {
+    width: 1000px;
+    height: 1000px;    
 }
 
 .door {

@@ -114,23 +114,21 @@ module.exports = function Controller(io, app){
         });
 
         socket.on('message', function(envelope){
+            console.log('message recvd')
+            var outgoing = {
+                message : envelope.message,
+                sender : socket.game.name
+            };
+            
             if(envelope.address && envelope.address != 'GLOBAL') {
                 if(envelope.address.room) {
-                    io.to(envelope.address.room).emit('message', {
-                        global: false,
-                        message: envelope.message
-                    });
+                    io.to(envelope.address.room).emit('message', outgoing);
                 } else if(typeof envelope.address.person === 'number' && members[envelope.address.person]){
-                    members[envelope.address.person].send('message', {
-                        global: false,
-                        message: envelope.message
-                    })
+                    members[envelope.address.person].send('message', outgoing)
                 }
             } else {
-                io.emit('message', {
-                    global : true,
-                    message: envelope.message
-                });
+                outgoing.global = true;
+                io.emit('message', outgoing);
             }
         });
 

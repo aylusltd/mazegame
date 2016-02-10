@@ -9,25 +9,34 @@
         MIN_Y = 0,
         MAX_Y = 21;
 
+    
 
-    document.getElementById('enterButton').addEventListener('click', function(){
-        var name = document.getElementById('userName').value;
-        var initialDialog = document.getElementById('enter');
-        initialDialog.parentElement.removeChild(initialDialog);
-        
-        socket.emit('enter', {userName: name});
-    });
-
-    function createUI(){
+    
+    (function createUI(){
         var room = document.getElementById('room');
-        console.log(room);
-        function turnLeft() {
+        function submitUser(){
+            var name = document.getElementById('userName').value;
+            var initialDialog = document.getElementById('enter');
+            initialDialog.parentElement.removeChild(initialDialog);
+            
+            socket.emit('enter', {userName: name});
+        }
+        
+        function sendMessage(){
+            var input = document.querySelector('#chat input');
+            var message = input.value;
+            
+            socket.emit('message', {message: message});
+            input.value='';
+        }
+
+        function turnRight() {
             heading++;
             heading = heading % 360;
             transformRoom();
         }
 
-        function turnRight() {
+        function turnLeft() {
             heading--;
             while(heading < 0) {
                 heading += 360;
@@ -37,7 +46,7 @@
 
         function moveForward() {
             var headingInRads = heading * Math.PI/180;
-            x+= Math.sin(headingInRads);
+            x-= Math.sin(headingInRads);
             y+= Math.cos(headingInRads);
             bound();
             transformRoom();
@@ -46,24 +55,37 @@
         function bound(){
             x = Math.max(MIN_X,x);
             x = Math.min(MAX_X,x);
+            console.log('x bound to ' + x);
             y = Math.max(MIN_Y,y);
             y = Math.min(MAX_Y,y);
+            console.log('y bound to ' + y);
+
         }
 
         function moveBackward() {
             var headingInRads = heading * Math.PI/180;
-            x-= Math.sin(headingInRads);
+            x+= Math.sin(headingInRads);
             y-= Math.cos(headingInRads);
             bound();
             transformRoom();
         }
 
-        document.querySelector('input').addEventListener('keydown', function(e){
+        Array.prototype.slice.call(document.querySelectorAll('input')).forEach(function(el){
+            el.addEventListener('keydown', function(e){
+            if(e.keyCode == 13) {
+                if(e.target == document.querySelector('#enter input') ) {
+                    submitUser();
+                } else if(e.target == document.querySelector('#chat input')){
+                    sendMessage();
+                }
+            }
             e.stopPropagation();
-        });
+        })});
+
         document.querySelector('button').addEventListener('keydown', function(e){
             e.stopPropagation();
         });
+
         document.addEventListener('keydown', function(e){
             switch(e.keyCode){
                 case 37:
@@ -82,11 +104,15 @@
                     break;
             }
         });
-    }
-    createUI();
+        document.getElementById('send').addEventListener('click', sendMessage);
+        document.getElementById('enterButton').addEventListener('click', submitUser);
+    })();
+
     function transformRoom(){
         console.log('heading: ' + heading + 'deg');
         console.log('position x: ' + x + 'y: ' + y);
+
+        var GAP = 120;
 
         var northWall = document.querySelector('.north.wall');
         var eastWall = document.querySelector('.east.wall');
@@ -94,29 +120,33 @@
         var southWall = document.querySelector('.south.wall');
         var room = document.getElementById('room');
 
-        if(heading >= 135 && heading <= 225){
+        if(heading >= 180 - (GAP/2) && heading <= 180 + (GAP/2)){
             northWall.style.display='none'
 
         } else {
             northWall.style.display='block'
         }
-        if(heading >= 225 && heading <= 315){
+        if(heading >= 270 - (GAP/2) && heading <= 270 + (GAP/2)){
             eastWall.style.display='none'
         } else {
             eastWall.style.display='block'
         }
-        if(heading >= 45 && heading <= 135){
+        if(heading >= 90 - (GAP/2) && heading <= 90 + (GAP/2)){
             westWall.style.display='none'
         } else {
             westWall.style.display='block'
         }
-        if(heading >= 315 || heading <= 45){
+        if(heading >= 360 - (GAP/2) || heading <= (GAP/2)){
             southWall.style.display='none'
         } else {
             southWall.style.display='block'
         }
 
-        room.style.transform = 'translateZ(-500px) rotateY(' + heading + 'deg) translateZ(' + (y/21 * 1000) + 'px) translateX(' + (x/21*1000) + 'px)'
+        room.style.transformOrigin = '50% 50% 500px';
+        room.style.transform = 'translateZ(-500px) rotateY(' + heading + 'deg)';
+        room.style.transform += 'translateZ(' + ((y)/21 * 1000) + 'px) translateX(' + ((x-11)/21*1000) + 'px)';
+        // room.style.transform = 'translateZ(-500px) rotateY(' + heading + 'deg)';
+        
 
     }
 
@@ -199,8 +229,8 @@
         room.appendChild(eastWall);
         room.appendChild(westWall);
         room.appendChild(southWall);
-        x=0;
-        y=0;
+        x=11;
+        y=11;
         transformRoom();
 
     });
@@ -280,6 +310,7 @@
         map.appendChild(table);
     });
     socket.on('message', function(envelope){
+        console.log('message recvd');
         var chat = document.getElementById('chat-display');
         var msg = document.createElement('div');
         var sender = document.createElement('span');
