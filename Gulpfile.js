@@ -40,7 +40,7 @@ gulp.task('views', function() {
 });
 
 gulp.task('watch', function() {
-  return gulp
+  // return gulp
     // Watch the input folder for change,
     // and run `sass` task when something happens
     gulp.watch(scssInput, ['sass']);
