@@ -11,6 +11,8 @@
   "dependencies": {
     "express": "^4.13.4",
     "jade": "^1.11.0",
+    "mongoose": "^4.4.12",
+    "redis": "^2.6.0-1",
     "socket.io": "^1.4.5"
   },
   "devDependencies": {
