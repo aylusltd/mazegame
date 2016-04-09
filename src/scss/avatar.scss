@@ -1,0 +1,33 @@
+.avatar{
+  position:absolute;
+  top:164px;
+}
+.avatar .face{
+  position:absolute;
+  top:0;
+  left:0;
+  background-color:#ACE;
+  height:100px;
+  width:62px;
+}
+.avatar .front.face{
+  tranform:translate(31px);
+}
+.avatar .back.face{
+  tranform:translate(-31px);
+}
+.avatar .left.face{
+  tranform:rotateY(-90deg) translate(31px);
+}
+.avatar .right.face{
+  tranform:rotateY(90deg) translate(31px);
+}
+
+.avatar .top.face{
+  tranform:rotateX(90deg) translate(50px);
+  width:62px;
+}
+.avatar .top.face{
+  tranform:rotateX(-90deg) translate(-50px);
+  width:62px;
+}
