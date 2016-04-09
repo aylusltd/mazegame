@@ -140,8 +140,8 @@ module.exports = function Controller(io, app){
         });
     });
 
-    this.initialize = function initialize(){
-        app.listen(8080);
+    this.initialize = function initialize(server, port){
+        server.listen(port);
         model.generate({
             x:0,
             y:0
