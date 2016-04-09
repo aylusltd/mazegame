@@ -77,18 +77,25 @@ div#roomContainer {
     top:0;
     left:0;
     background-color:#dddddd;
-    
+    border: 2px solid #000;
+}
+.floor {
+    background-image: url("/img/floor.jpg");
+    background-size: 100%;
+}
+.wall {
+    background: rgba(211, 211, 236, 0.35);
 }
 .north.wall{
-    background-color:#dd0000;
+    // background-color:#dd0000;
     transform: translateZ(-500px);
 }
 .east.wall{
-    background-color:#00dd00;
+    // background-color:#00dd00;
     transform:rotateY(90deg) translateZ(500px);
 }
 .west.wall{
-    background-color:#0000dd;
+    // background-color:#0000dd;
     transform:rotateY(-90deg) translateZ(500px);
 }
 .south.wall{
