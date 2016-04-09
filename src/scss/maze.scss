@@ -1,5 +1,6 @@
 body {
     font-family: 'Open Sans', sans-serif;
+    overflow: hidden;
 }
 
 div#modal-screen{
@@ -56,6 +57,7 @@ div#room{
     left:0%;
     width:1000px;
     height: 1000px;
+    margin: 0 auto;
     transform-style: preserve-3d;
 }
 div#chat{
