@@ -2,10 +2,11 @@ div#modal-screen{
     position: absolute;
     top:0;
     left:0;
-    background-color:rgba(0,0,0,0.5);
+    background-color:rgba(0,0,0,0.6);
     width:100%;
     height: 100%;
     z-index: 100;
+    color: red;
 }
 div#enter{
     position: absolute;
@@ -124,5 +125,5 @@ div#error-message{
     left:40%;
     text-align: center;
     background-color: red;
-    color:white;
+    color:red;
 }
