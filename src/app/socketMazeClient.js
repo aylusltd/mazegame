@@ -3,11 +3,11 @@
         isErr = false,
         heading = 0,
         x = 11,
-        MIN_X = 0,
-        MAX_X = 21, 
+        MIN_X = 3,
+        MAX_X = 18, 
         y = 11,
-        MIN_Y = 0,
-        MAX_Y = 21;
+        MIN_Y = 3,
+        MAX_Y = 18;
 
     
 
@@ -143,7 +143,8 @@
         }
 
         room.style.transformOrigin = '50% 50% 500px';
-        room.style.transform = 'translateZ(-500px) rotateY(' + heading + 'deg)';
+        // room.style.transform = 'translateZ(-500px) rotateY(' + heading + 'deg)';
+        room.style.transform = 'rotateY(' + heading + 'deg)';
         room.style.transform += 'translateZ(' + ((y)/21 * 1000) + 'px) translateX(' + ((x-11)/21*1000) + 'px)';
         // room.style.transform = 'translateZ(-500px) rotateY(' + heading + 'deg)';
         

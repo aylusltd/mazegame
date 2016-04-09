@@ -1,3 +1,6 @@
+body {
+  font-family: 'Open Sans', sans-serif; }
+
 div#modal-screen {
   position: absolute;
   top: 0;
@@ -9,21 +12,44 @@ div#modal-screen {
   color: red; }
 
 div#enter {
-  position: absolute;
-  top: 30%;
-  left: 30%;
-  background-color: #6464ff;
-  width: 10%;
-  height: 10%;
-  padding: 10%;
-  color: #EEEEEE; }
+  background-color: rgba(202, 0, 0, 0.5);
+  max-width: 300px;
+  padding: 10px 10px 18px 10px;
+  color: #EEEEEE;
+  margin: 10% auto;
+  text-align: center;
+  text-transform: uppercase; }
+  div#enter span {
+    display: block;
+    font-size: 1.5em;
+    text-align: center;
+    margin-bottom: 20px;
+    letter-spacing: .025em; }
+  div#enter #userName {
+    width: 100%;
+    max-width: 250px;
+    display: block;
+    padding: 15px 0;
+    margin: 0 auto; }
+  div#enter button {
+    width: 100%;
+    max-width: 250px;
+    display: block;
+    padding: 10px 0;
+    margin: 20px auto 0 auto;
+    background-color: #FFF;
+    color: #333;
+    border: none;
+    font-size: 1.25em;
+    text-transform: uppercase;
+    font-weight: 700; }
 
 div#room {
   position: absolute;
   top: 0%;
   left: 0%;
-  width: 80%;
-  height: 100%;
+  width: 1000px;
+  height: 1000px;
   transform-style: preserve-3d; }
 
 div#chat {
@@ -63,8 +89,9 @@ div#chat-input button {
   height: 120%; }
 
 div#roomContainer {
-  perspective: 1000px;
-  perspective-origin: 500px 250px; }
+  perspective: 500px;
+  perspective-origin: 500px 250px;
+  transform: translateZ(-500); }
 
 .wall, .floor, .ceiling {
   position: absolute;
@@ -72,18 +99,23 @@ div#roomContainer {
   width: 1000px;
   top: 0;
   left: 0;
-  background-color: #dddddd; }
+  background-color: #dddddd;
+  border: 2px solid #000; }
+
+.floor {
+  background-image: url("/img/floor.jpg");
+  background-size: 100%; }
+
+.wall {
+  background: rgba(211, 211, 236, 0.35); }
 
 .north.wall {
-  background-color: #dd0000;
   transform: translateZ(-500px); }
 
 .east.wall {
-  background-color: #00dd00;
   transform: rotateY(90deg) translateZ(500px); }
 
 .west.wall {
-  background-color: #0000dd;
   transform: rotateY(-90deg) translateZ(500px); }
 
 .south.wall {
