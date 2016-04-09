@@ -12,7 +12,7 @@ var credentials = {
     cert: fs.readFileSync('sslcert/server.crt')
 };
 
-app.use(express.static('public'));
+app.use(express.static('dist'));
 
 // function handler (req, res) {
 //     var path = url.parse(req.url).pathname;
