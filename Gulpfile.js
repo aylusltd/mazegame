@@ -4,6 +4,7 @@ var webpack = require('gulp-webpack');
 var jade = require('gulp-jade');
 
 var jsInput = './src/app/**'
+var imagesInput = './src/img/**'
 var viewsInput = './src/views/**/*.jade';
 var scssInput = './src/scss/**/*.scss';
 var output = './dist';
@@ -25,11 +26,17 @@ gulp.task('scripts', function() {
     .pipe(gulp.dest(output));
 });
 
+gulp.task('images', function() {
+  return gulp.src(imagesInput)
+    // .pipe(webpack())
+    .pipe(gulp.dest(output + '/img'));
+});
+
 gulp.task('views', function() {
   // var YOUR_LOCALS = {};
   gulp.src(viewsInput)
     .pipe(jade())
-    .pipe(gulp.dest('./dist/'));
+    .pipe(gulp.dest(output));
 });
 
 gulp.task('watch', function() {
@@ -39,6 +46,7 @@ gulp.task('watch', function() {
     gulp.watch(scssInput, ['sass']);
     gulp.watch(jsInput, ['scripts']);
     gulp.watch(viewsInput, ['views']);
+    gulp.watch(imagesInput, ['images']);
     // When there is a change,
     // log a message in the console
     gulp.on('change', function(event) {
@@ -46,4 +54,4 @@ gulp.task('watch', function() {
     });
 });
 
-gulp.task('default', ['sass', 'scripts', 'views', 'watch']);
+gulp.task('default', ['sass', 'scripts', 'views', 'images', 'watch']);

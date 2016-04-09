@@ -1,5 +1,5 @@
 (function View(window){
-    var socket = window.io('http://localhost:8080'),
+    var socket = window.io('https://localhost:443'),
         isErr = false,
         heading = 0,
         x = 11,
@@ -153,6 +153,8 @@
     socket.on('renderRoom', function renderRoom(currentRoom){
         console.log('render Room received');
         var room = document.getElementById('room'),
+            
+            
             northDoor,
             northWall = document.createElement('div'),
             eastDoor,
@@ -176,6 +178,7 @@
             });
             northWall.appendChild(northDoor);
         }
+
 
         if(currentRoom.exits.e){
             eastDoor = document.createElement('div');
@@ -206,6 +209,7 @@
             });
             southWall.appendChild(southDoor);
         }
+
         console.log('render received');
         document.getElementById('modal-screen').style.display='none';
 
