@@ -165,9 +165,10 @@
             southDoor,
             southWall = document.createElement('div'),
             floor = document.createElement('div'),
+            screen = document.createElement('div'),
             ceiling = document.createElement('div');
 
-
+            currentRoom.exits.n = true;
 
         if(currentRoom.exits.n){
             northDoor = document.createElement('div');
@@ -175,46 +176,49 @@
             northDoor.classList.add('north');
 
             northDoor.addEventListener('click', function() {
-                socket.emit('move', {direction: 'n'});
+                // socket.emit('move', {direction: 'n'});
+                socket.emit('menu', { hello: 'world' });
+                alert("welcome to space");
             });
             northWall.appendChild(northDoor);
         }
 
 
-        if(currentRoom.exits.e){
-            eastDoor = document.createElement('div');
-            eastDoor.classList.add('door');
-            eastDoor.classList.add('east');
-            eastDoor.addEventListener('click', function() {
-                socket.emit('move', {direction: 'e'});
-            });
-            eastWall.appendChild(eastDoor);
-        }
+        // if(currentRoom.exits.e){
+        //     eastDoor = document.createElement('div');
+        //     eastDoor.classList.add('door');
+        //     eastDoor.classList.add('east');
+        //     eastDoor.addEventListener('click', function() {
+        //         socket.emit('move', {direction: 'e'});
+        //     });
+        //     eastWall.appendChild(eastDoor);
+        // }
 
-        if(currentRoom.exits.w){
-            westDoor = document.createElement('div');
-            westDoor.classList.add('door');
-            westDoor.classList.add('west');
-            westDoor.addEventListener('click', function() {
-                socket.emit('move', {direction: 'w'});
-            });
-            westWall.appendChild(westDoor);
-        }
+        // if(currentRoom.exits.w){
+        //     westDoor = document.createElement('div');
+        //     westDoor.classList.add('door');
+        //     westDoor.classList.add('west');
+        //     westDoor.addEventListener('click', function() {
+        //         socket.emit('move', {direction: 'w'});
+        //     });
+        //     westWall.appendChild(westDoor);
+        // }
 
-        if(currentRoom.exits.s){
-            southDoor = document.createElement('div');
-            southDoor.classList.add('door');
-            southDoor.classList.add('south');
-            southDoor.addEventListener('click', function() {
-                socket.emit('move', {direction: 's'});
-            });
-            southWall.appendChild(southDoor);
-        }
+        // if(currentRoom.exits.s){
+        //     southDoor = document.createElement('div');
+        //     southDoor.classList.add('door');
+        //     southDoor.classList.add('south');
+        //     southDoor.addEventListener('click', function() {
+        //         socket.emit('move', {direction: 's'});
+        //     });
+        //     southWall.appendChild(southDoor);
+        // }
 
         console.log('render received');
         document.getElementById('modal-screen').style.display='none';
 
         floor.classList.add('floor');
+        screen.classList.add('screen');
         ceiling.classList.add('ceiling');
         northWall.classList.add('wall');
         eastWall.classList.add('wall');
@@ -226,9 +230,11 @@
         westWall.classList.add('west');
         southWall.classList.add('south');
 
+        screen.innerHTML = '<iframe width="400" height="260" src="https://www.youtube.com/embed/Wji-BZ0oCwg" frameborder="0" allowfullscreen></iframe>';
 
         room.innerHTML = '';
         room.appendChild(floor);
+        room.appendChild(screen);
         room.appendChild(ceiling);
         room.appendChild(northWall);
         room.appendChild(eastWall);
@@ -240,80 +246,80 @@
 
     });
 
-    socket.on('userError', function displayError(err){
-        var bubble, 
-            x;
-        if(!isErr) {
-            bubble = document.createElement('div');
-            x = document.createElement('div');
-            x.classList.add('error-close');
-            bubble.innerText = err;
-            bubble.appendChild(x);
-            bubble.classList.add('error');
+    // socket.on('userError', function displayError(err){
+    //     var bubble, 
+    //         x;
+    //     if(!isErr) {
+    //         bubble = document.createElement('div');
+    //         x = document.createElement('div');
+    //         x.classList.add('error-close');
+    //         bubble.innerText = err;
+    //         bubble.appendChild(x);
+    //         bubble.classList.add('error');
 
-            bubble.setAttribute('id', 'error-message');
-            x.addEventListener('click', function(){
-                document.getElementById('modal-screen').style.display='none'
-                bubble.parentElement.removeChild(bubble);
-                isErr=false;
-            });
-            document.getElementById('modal-screen').appendChild(bubble);
-            document.getElementById('modal-screen').style.display='block'
-            isErr = true;
-        } else {
-            bubble = document.getElementById('error-message');
-            bubble.innerText += '\n' + err;
-        }
-    });
+    //         bubble.setAttribute('id', 'error-message');
+    //         x.addEventListener('click', function(){
+    //             document.getElementById('modal-screen').style.display='none'
+    //             bubble.parentElement.removeChild(bubble);
+    //             isErr=false;
+    //         });
+    //         document.getElementById('modal-screen').appendChild(bubble);
+    //         document.getElementById('modal-screen').style.display='block'
+    //         isErr = true;
+    //     } else {
+    //         bubble = document.getElementById('error-message');
+    //         bubble.innerText += '\n' + err;
+    //     }
+    // });
 
-    socket.on('displayMap', function displayMap(maze) {
-        var map = document.getElementById('map');
-        var width = maze.length;
-        var height = maze.reduce(function(p,c,i){
-            if(c.length>p){
-                return c.length;
-            } else {
-                return p;
-            }
-        },0);
+    // socket.on('displayMap', function displayMap(maze) {
+    //     var map = document.getElementById('map');
+    //     var width = maze.length;
+    //     var height = maze.reduce(function(p,c,i){
+    //         if(c.length>p){
+    //             return c.length;
+    //         } else {
+    //             return p;
+    //         }
+    //     },0);
 
-        var table = document.createElement('table');
-        var tr, td, n, e, w, s;
+    //     var table = document.createElement('table');
+    //     var tr, td, n, e, w, s;
 
-        for(var y=0; y<height; y++) {
-            tr = document.createElement('tr');
-            for(var x=0; x<width; x++){
-                td = document.createElement('td');
-                if(maze[x][y]){
-                    td.classList.add('room');
-                    if(maze[x][y].visited){
-                        td.classList.add('visited');
-                    }
-                    if(maze[x][y].exits.n) {
-                        n = document.createElement('div');
-                        td.appendChild(n);
-                    }
-                    if(maze[x][y].exits.e) {
-                        e = document.createElement('div');
-                        td.appendChild(e);
-                    }
-                    if(maze[x][y].exits.w) {
-                        w = document.createElement('div');
-                        td.appendChild(w);
-                    }
-                    if(maze[x][y].exits.s) {
-                        s = document.createElement('div');
-                        td.appendChild(s);
-                    }
-                }
-                tr.appendChild(td);
-            }
-            table.appendChild(tr);
-        }
+    //     for(var y=0; y<height; y++) {
+    //         tr = document.createElement('tr');
+    //         for(var x=0; x<width; x++){
+    //             td = document.createElement('td');
+    //             if(maze[x][y]){
+    //                 td.classList.add('room');
+    //                 if(maze[x][y].visited){
+    //                     td.classList.add('visited');
+    //                 }
+    //                 if(maze[x][y].exits.n) {
+    //                     n = document.createElement('div');
+    //                     td.appendChild(n);
+    //                 }
+    //                 if(maze[x][y].exits.e) {
+    //                     e = document.createElement('div');
+    //                     td.appendChild(e);
+    //                 }
+    //                 if(maze[x][y].exits.w) {
+    //                     w = document.createElement('div');
+    //                     td.appendChild(w);
+    //                 }
+    //                 if(maze[x][y].exits.s) {
+    //                     s = document.createElement('div');
+    //                     td.appendChild(s);
+    //                 }
+    //             }
+    //             tr.appendChild(td);
+    //         }
+    //         table.appendChild(tr);
+    //     }
 
-        map.innerHTML='';
-        map.appendChild(table);
-    });
+    //     map.innerHTML='';
+    //     map.appendChild(table);
+    // });
     socket.on('message', function(envelope){
         console.log('message recvd');
         var chat = document.getElementById('chat-display');

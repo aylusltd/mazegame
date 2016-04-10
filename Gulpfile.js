@@ -35,7 +35,9 @@ gulp.task('images', function() {
 gulp.task('views', function() {
   // var YOUR_LOCALS = {};
   gulp.src(viewsInput)
-    .pipe(jade())
+    .pipe(jade({
+      pretty: true
+    }))
     .pipe(gulp.dest(output));
 });
 

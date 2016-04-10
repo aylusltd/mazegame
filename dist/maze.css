@@ -104,15 +104,53 @@ div#roomContainer {
   background-color: #dddddd;
   border: 2px solid #000; }
 
-.floor {
-  background-image: url("/img/floor.jpg");
+.floor, .ceiling {
+  background-image: url("/img/FloorGrateTiles.jpg");
   background-size: 100%; }
 
 .wall {
-  background: rgba(211, 211, 236, 0.35); }
+  background: transparent; }
+  .wall:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("/img/tie-fighter.png") no-repeat;
+    background-size: cover;
+    z-index: 1; }
+  .wall:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("/img/space.jpg");
+    background-size: 1400px 700px;
+    background-attachment: fixed;
+    z-index: -2; }
+  .wall.west:after {
+    background-position: 250% 50%; }
+
+.screen {
+  width: 20%;
+  height: 10%;
+  position: absolute;
+  top: 10%;
+  left: 40%;
+  background-color: #000;
+  z-index: 3;
+  transform: rotateY(-45deg) translateZ(-300px); }
+  .screen iframe {
+    background-color: #000;
+    border: 10px solid #000; }
 
 .north.wall {
   transform: translateZ(-500px); }
+  .north.wall:before {
+    z-index: -1; }
 
 .east.wall {
   transform: rotateY(90deg) translateZ(500px); }
@@ -136,13 +174,13 @@ div#roomContainer {
   height: 1000px; }
 
 .door {
-  position: absolute;
-  height: 80%;
-  width: 18%;
-  bottom: 0;
-  left: 41%;
-  background-color: #dddd99;
-  cursor: pointer; }
+  height: 569px;
+  width: 909px;
+  margin: 0 auto;
+  background-image: url("/img/maxresdefault.jpg");
+  background-size: cover;
+  cursor: pointer;
+  z-index: 1000000; }
 
 div#error-message {
   height: 20%;
@@ -152,3 +190,16 @@ div#error-message {
   text-align: center;
   background-color: red;
   color: red; }
+
+#menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+  display: none; }
+  #menu ul {
+    max-width: 600px;
+    list-style-type: none; }

@@ -1,1 +1,36 @@
-<!DOCTYPE html><html lang="en"><head><title>Socket Maze</title><script src="/socket.io/socket.io.js"></script><link rel="stylesheet" href="maze.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700"></head><body><div id="modal-screen"><div id="enter"><span>Enter a Username:</span><input id="userName" type="text"><button id="enterButton">Enter</button></div></div><div id="roomContainer"><div id="room">Room Loading</div></div><div id="chat"> <div id="chat-display"><div>Chat loading</div></div><div id="chat-input"><input type="text"><button id="send">Send</button></div></div><div id="map">Map loading</div><script src="/socketMazeClient.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Socket Maze</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="maze.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700">
+  </head>
+  <body>
+    <div id="modal-screen">
+      <div id="enter"><span>Enter a Username:</span>
+        <input id="userName" type="text">
+        <button id="enterButton">Enter</button>
+      </div>
+    </div>
+    <div id="roomContainer">
+      <div id="room">Room Loading</div>
+    </div>
+    <div id="chat"> 
+      <div id="chat-display">
+        <div>Chat loading</div>
+      </div>
+      <div id="chat-input">
+        <input type="text">
+        <button id="send">Send</button>
+      </div>
+    </div>
+    <div id="map">Map loading</div>
+    <div id="menu">
+      <ul>
+        <li><a id="test" href="#">hi</a></li>
+      </ul>
+    </div>
+    <script src="/socketMazeClient.js"></script>
+  </body>
+</html>

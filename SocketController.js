@@ -140,6 +140,10 @@ module.exports = function Controller(io, app){
             model.members = model.members.filter(function(m){return !!m});
             io.emit('members', model.members);
         });
+
+        socket.on('menu', function(data) {
+            console.log(data);
+        });
     });
 
     this.initialize = function initialize(server, port){
