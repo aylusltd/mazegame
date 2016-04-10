@@ -230,7 +230,8 @@
         westWall.classList.add('west');
         southWall.classList.add('south');
 
-        screen.innerHTML = '<iframe width="400" height="260" src="https://www.youtube.com/embed/Wji-BZ0oCwg" frameborder="0" allowfullscreen></iframe>';
+        // screen.innerHTML = '<iframe width="400" height="260" src="https://www.youtube.com/embed/Wji-BZ0oCwg" frameborder="0" allowfullscreen></iframe>';
+        screen.innerHTML = '<iframe width="400" height="260" src="https://trello.com/b/lBFwwkiJ.html" frameborder="0" allowfullscreen></iframe>';
 
         room.innerHTML = '';
         room.appendChild(floor);
