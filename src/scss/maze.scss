@@ -212,6 +212,9 @@ div#roomContainer {
     transform-style: preserve-3d;
     transform: translateY(200px);
     cursor: pointer;
+    &.chair2{
+            transform: rotateY(180deg) translateX(850px) translateZ(360px) translateY(-30px);
+    }
 }
 .chairseat {
     height: 100px;

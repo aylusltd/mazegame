@@ -259,11 +259,17 @@
         chair.appendChild(chairback);
         chair.appendChild(chairseat);
         chairback.appendChild(chairscreen);
-    
+        chair.id = "chair1";
+        
+        chair2 = chair.cloneNode(true);
+        chair2.classList.add('chair2');
+        chair2.id = "chair2";
+        room.appendChild(chair2);
         x=11;
         y=11;
         transformRoom();
-        chair.addEventListener('click', startVideo);
+        chair.addEventListener('click', startVideo1);
+        chair2.addEventListener('click', startVideo2);
         // startVideo();
 
     });
@@ -381,16 +387,28 @@
 
 
     // video = document.querySelector('.chairscreen');
-    function startVideo() {
+    function startVideo1() {
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
          
         if (navigator.getUserMedia) {       
-            navigator.getUserMedia({video: true}, handleVideo, videoError);
+            navigator.getUserMedia({video: true}, handleVideo1, videoError);
         }
     }
 
-    function handleVideo(stream) {
-        document.querySelector('.chairscreen').src = window.URL.createObjectURL(stream);
+    function handleVideo1(stream) {
+        document.querySelector('#chair1 .chairscreen').src = window.URL.createObjectURL(stream);
+    }
+
+    function startVideo2() {
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+         
+        if (navigator.getUserMedia) {       
+            navigator.getUserMedia({video: true}, handleVideo2, videoError);
+        }
+    }
+
+    function handleVideo2(stream) {
+        document.querySelector('#chair2 .chairscreen').src = window.URL.createObjectURL(stream);
     }
      
     function videoError(e) {

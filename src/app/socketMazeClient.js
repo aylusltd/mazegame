@@ -259,7 +259,12 @@
         chair.appendChild(chairback);
         chair.appendChild(chairseat);
         chairback.appendChild(chairscreen);
-    
+        chair.id = "chair1";
+        
+        chair2 = chair.cloneNode(true);
+        chair2.classList.add('chair2');
+        chair2.id = "chair2";
+        room.appendChild(chair2);
         x=11;
         y=11;
         transformRoom();
@@ -381,7 +386,8 @@
 
 
     // video = document.querySelector('.chairscreen');
-    function startVideo() {
+    function startVideo(test) {
+        console.log(test);
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
          
         if (navigator.getUserMedia) {       
