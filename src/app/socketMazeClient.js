@@ -166,8 +166,12 @@
             southWall = document.createElement('div'),
             floor = document.createElement('div'),
             screen = document.createElement('div'),
+            chair = document.createElement('div'),
+            chairback = document.createElement('div'),
+            chairseat = document.createElement('div'),
+            chairscreen = document.createElement('video'),
             ceiling = document.createElement('div');
-
+            
             currentRoom.exits.n = true;
 
         if(currentRoom.exits.n){
@@ -230,8 +234,18 @@
         westWall.classList.add('west');
         southWall.classList.add('south');
 
-        // screen.innerHTML = '<iframe width="400" height="260" src="https://www.youtube.com/embed/Wji-BZ0oCwg" frameborder="0" allowfullscreen></iframe>';
-        screen.innerHTML = '<iframe width="400" height="260" src="https://trello.com/b/lBFwwkiJ.html" frameborder="0" allowfullscreen></iframe>';
+        chair.classList.add('chair');
+        chairback.classList.add('chairback');
+        chairseat.classList.add('chairseat');
+        chairscreen.classList.add('chairscreen');
+
+        // chair.style.boxShadow = generateBoxShadow(100, '1px', 'black');
+        // chairback.style.boxShadow = generateBoxShadow(100, '1px', 'black');
+        
+        screen.innerHTML = '<iframe width="300" height="195" src="https://www.youtube.com/embed/Wji-BZ0oCwg" frameborder="0" allowfullscreen></iframe>';
+        // screen.innerHTML = '<iframe width="400" height="260" src="https://trello.com/b/lBFwwkiJ.html" frameborder="0" allowfullscreen></iframe>';
+
+
 
         room.innerHTML = '';
         room.appendChild(floor);
@@ -241,9 +255,16 @@
         room.appendChild(eastWall);
         room.appendChild(westWall);
         room.appendChild(southWall);
+        room.appendChild(chair);
+        chair.appendChild(chairback);
+        chair.appendChild(chairseat);
+        chairback.appendChild(chairscreen);
+    
         x=11;
         y=11;
         transformRoom();
+        chair.addEventListener('click', startVideo);
+        // startVideo();
 
     });
 
@@ -343,4 +364,37 @@
         chat.appendChild(msg);
 
     });
+
+    // IDEA FOUND HERE: 
+    // http://jsfiddle.net/gion_13/nDCme/
+    function generateBoxShadow(steps, width, color) {
+        var r = '';
+        
+        for(var i=0;i<=steps;i++) {
+            if(i !== 0) {
+                r += ', ';
+            }
+            r += i + 'px ' + i + 'px ' + width + ' ' + color;
+        }
+        return r;
+    }
+
+
+    // video = document.querySelector('.chairscreen');
+    function startVideo() {
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+         
+        if (navigator.getUserMedia) {       
+            navigator.getUserMedia({video: true}, handleVideo, videoError);
+        }
+    }
+
+    function handleVideo(stream) {
+        document.querySelector('.chairscreen').src = window.URL.createObjectURL(stream);
+    }
+     
+    function videoError(e) {
+        // do something
+    }
+
 })(window);

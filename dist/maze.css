@@ -128,8 +128,7 @@ div#roomContainer {
     right: 0;
     bottom: 0;
     background: url("/img/space.jpg");
-    background-size: 1400px 700px;
-    background-attachment: fixed;
+    background-size: cover;
     z-index: -2; }
   .wall.west:after {
     background-position: 250% 50%; }
@@ -181,6 +180,66 @@ div#roomContainer {
   background-size: cover;
   cursor: pointer;
   z-index: 1000000; }
+
+.chair {
+  transform-style: preserve-3d;
+  transform: translateY(200px);
+  cursor: pointer; }
+
+.chairseat {
+  height: 100px;
+  width: 100px;
+  background: url("/img/chair.png");
+  transform-style: preserve-3d;
+  transform: rotateX(-90deg); }
+  .chairseat:after {
+    content: '';
+    transform: rotateY(90deg) translateZ(50px) translateX(-50px);
+    background: url("/img/chair.png");
+    border: 5px solid #333;
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    bottom: 0; }
+  .chairseat:before {
+    content: '';
+    transform: rotateY(-90deg) translateZ(50px) translateX(56px);
+    background: url("/img/chair.png");
+    border: 5px solid #333;
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    bottom: 0; }
+
+.chairback {
+  height: 140px;
+  width: 150px;
+  background: #000;
+  border-radius: 10px;
+  background: #000;
+  transform: rotate(5deg) translateY(55px) translateX(0px) translateZ(62px);
+  position: relative;
+  transform-style: preserve-3d; }
+  .chairback:before {
+    content: '';
+    transform: rotateY(0deg) translateZ(-2px) translateX(20px) translateY(100px);
+    background: url("/img/chair.png");
+    border: 5px solid #333;
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    bottom: 0; }
+
+.chairscreen {
+  position: absolute;
+  top: 5px;
+  bottom: 5px;
+  left: 5px;
+  right: 5px;
+  background: #333;
+  width: 140px;
+  height: 130px;
+  transform-style: preserve-3d; }
 
 div#error-message {
   height: 20%;
