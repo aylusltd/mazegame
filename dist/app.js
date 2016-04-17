@@ -288,6 +288,22 @@
 	        chair2.classList.add('chair2');
 	        chair2.setAttribute('data-chair', 2);
 	        chair2.id = "chair2";
+
+	        function makeChair(n){
+	            var c = chair.cloneNode(true);
+	            var x =[0,0, 185, 185, 185, 185];
+	            var z = [0,0, -1085, -1085, -715, -715];
+	            var r = [0,0, 45, -45, 45, -45];
+	            c.setAttribute('data-chair', n);
+	            c.addEventListener('click', video);
+	            c.style.transform="translateY(550px) translateZ("+z[n]+"px) translateX("+x[n]+"px) rotateY("+r[n]+"deg)";
+	            room.appendChild(c);
+	        }
+
+	        for(var i=3; i<7; i++){
+	            makeChair(i);
+	        }
+
 	        room.appendChild(chair2);
 	        x=11;
 	        y=11;

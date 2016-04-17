@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node forever.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.13.4",
+    "forever": "^0.15.1",
     "jade": "^1.11.0",
     "mongoose": "^4.4.12",
     "redis": "^2.6.0-1",
