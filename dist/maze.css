@@ -254,7 +254,8 @@ div#roomContainer {
   background: #333;
   width: 140px;
   height: 130px;
-  transform-style: preserve-3d; }
+  transform-style: preserve-3d;
+  transform: rotateY(90deg); }
 
 div#error-message {
   height: 20%;
