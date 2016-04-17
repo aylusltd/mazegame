@@ -1,7 +1,7 @@
 var video = require('./video');
 (function View(window){
     document.querySelector('#roomContainer').style.left = ((window.innerHeight - 1800) / 2) + 'px';
-    var socket = window.io('https://localhost:443'),
+    var socket = window.io(window.url),
         isErr = false,
         heading = 0,
         x = 11,

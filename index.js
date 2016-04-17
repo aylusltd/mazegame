@@ -16,7 +16,7 @@ app.use(express.static('dist'));
 
 var httpServer = require('http').createServer(app);
 var httpsServer = https.createServer(credentials, app);
-var io = require('socket.io')(httpsServer);
+var io = require('socket.io')(httpServer);
 
 var controller = new Controller(io, app);
 
