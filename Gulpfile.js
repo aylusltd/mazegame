@@ -22,7 +22,7 @@ gulp.task('sass', function () {
 
 gulp.task('scripts', function() {
   return gulp.src(jsInput)
-    // .pipe(webpack())
+    .pipe(webpack(require('./webpack.config.js')))
     .pipe(gulp.dest(output));
 });
 

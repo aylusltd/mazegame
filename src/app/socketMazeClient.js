@@ -1,3 +1,4 @@
+var video = require('./video');
 (function View(window){
     var socket = window.io('https://localhost:443'),
         isErr = false,
@@ -187,37 +188,6 @@
             northWall.appendChild(northDoor);
         }
 
-
-        // if(currentRoom.exits.e){
-        //     eastDoor = document.createElement('div');
-        //     eastDoor.classList.add('door');
-        //     eastDoor.classList.add('east');
-        //     eastDoor.addEventListener('click', function() {
-        //         socket.emit('move', {direction: 'e'});
-        //     });
-        //     eastWall.appendChild(eastDoor);
-        // }
-
-        // if(currentRoom.exits.w){
-        //     westDoor = document.createElement('div');
-        //     westDoor.classList.add('door');
-        //     westDoor.classList.add('west');
-        //     westDoor.addEventListener('click', function() {
-        //         socket.emit('move', {direction: 'w'});
-        //     });
-        //     westWall.appendChild(westDoor);
-        // }
-
-        // if(currentRoom.exits.s){
-        //     southDoor = document.createElement('div');
-        //     southDoor.classList.add('door');
-        //     southDoor.classList.add('south');
-        //     southDoor.addEventListener('click', function() {
-        //         socket.emit('move', {direction: 's'});
-        //     });
-        //     southWall.appendChild(southDoor);
-        // }
-
         console.log('render received');
         document.getElementById('modal-screen').style.display='none';
 
@@ -273,85 +243,11 @@
         x=11;
         y=11;
         transformRoom();
-        chair.addEventListener('click', startVideo);
-        // startVideo();
+        chair.addEventListener('click', video);
 
     });
 
-    // socket.on('userError', function displayError(err){
-    //     var bubble, 
-    //         x;
-    //     if(!isErr) {
-    //         bubble = document.createElement('div');
-    //         x = document.createElement('div');
-    //         x.classList.add('error-close');
-    //         bubble.innerText = err;
-    //         bubble.appendChild(x);
-    //         bubble.classList.add('error');
-
-    //         bubble.setAttribute('id', 'error-message');
-    //         x.addEventListener('click', function(){
-    //             document.getElementById('modal-screen').style.display='none'
-    //             bubble.parentElement.removeChild(bubble);
-    //             isErr=false;
-    //         });
-    //         document.getElementById('modal-screen').appendChild(bubble);
-    //         document.getElementById('modal-screen').style.display='block'
-    //         isErr = true;
-    //     } else {
-    //         bubble = document.getElementById('error-message');
-    //         bubble.innerText += '\n' + err;
-    //     }
-    // });
-
-    // socket.on('displayMap', function displayMap(maze) {
-    //     var map = document.getElementById('map');
-    //     var width = maze.length;
-    //     var height = maze.reduce(function(p,c,i){
-    //         if(c.length>p){
-    //             return c.length;
-    //         } else {
-    //             return p;
-    //         }
-    //     },0);
-
-    //     var table = document.createElement('table');
-    //     var tr, td, n, e, w, s;
-
-    //     for(var y=0; y<height; y++) {
-    //         tr = document.createElement('tr');
-    //         for(var x=0; x<width; x++){
-    //             td = document.createElement('td');
-    //             if(maze[x][y]){
-    //                 td.classList.add('room');
-    //                 if(maze[x][y].visited){
-    //                     td.classList.add('visited');
-    //                 }
-    //                 if(maze[x][y].exits.n) {
-    //                     n = document.createElement('div');
-    //                     td.appendChild(n);
-    //                 }
-    //                 if(maze[x][y].exits.e) {
-    //                     e = document.createElement('div');
-    //                     td.appendChild(e);
-    //                 }
-    //                 if(maze[x][y].exits.w) {
-    //                     w = document.createElement('div');
-    //                     td.appendChild(w);
-    //                 }
-    //                 if(maze[x][y].exits.s) {
-    //                     s = document.createElement('div');
-    //                     td.appendChild(s);
-    //                 }
-    //             }
-    //             tr.appendChild(td);
-    //         }
-    //         table.appendChild(tr);
-    //     }
-
-    //     map.innerHTML='';
-    //     map.appendChild(table);
-    // });
+    
     socket.on('message', function(envelope){
         console.log('message recvd');
         var chat = document.getElementById('chat-display');
@@ -387,25 +283,6 @@
             r += i + 'px ' + i + 'px ' + width + ' ' + color;
         }
         return r;
-    }
-
-
-    // video = document.querySelector('.chairscreen');
-    function startVideo(test) {
-        console.log(test);
-        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
-         
-        if (navigator.getUserMedia) {       
-            navigator.getUserMedia({video: true}, handleVideo, videoError);
-        }
-    }
-
-    function handleVideo(stream) {
-        document.querySelector('.chairscreen').src = window.URL.createObjectURL(stream);
-    }
-     
-    function videoError(e) {
-        // do something
     }
 
 })(window);
