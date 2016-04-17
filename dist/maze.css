@@ -2,6 +2,9 @@ body {
   font-family: 'Open Sans', sans-serif;
   overflow: hidden; }
 
+video {
+  backface-visibility: hidden; }
+
 div#modal-screen {
   position: absolute;
   top: 0;
