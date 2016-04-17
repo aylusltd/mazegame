@@ -238,6 +238,7 @@
         chairback.classList.add('chairback');
         chairseat.classList.add('chairseat');
         chairscreen.classList.add('chairscreen');
+        chairscreen.setAttribute('autoplay', true);
 
         // chair.style.boxShadow = generateBoxShadow(100, '1px', 'black');
         // chairback.style.boxShadow = generateBoxShadow(100, '1px', 'black');
@@ -268,8 +269,7 @@
         x=11;
         y=11;
         transformRoom();
-        chair.addEventListener('click', startVideo1);
-        chair2.addEventListener('click', startVideo2);
+        chair.addEventListener('click', startVideo);
         // startVideo();
 
     });
@@ -387,28 +387,17 @@
 
 
     // video = document.querySelector('.chairscreen');
-    function startVideo1() {
+    function startVideo(test) {
+        console.log(test);
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
          
         if (navigator.getUserMedia) {       
-            navigator.getUserMedia({video: true}, handleVideo1, videoError);
+            navigator.getUserMedia({video: true}, handleVideo, videoError);
         }
     }
 
-    function handleVideo1(stream) {
-        document.querySelector('#chair1 .chairscreen').src = window.URL.createObjectURL(stream);
-    }
-
-    function startVideo2() {
-        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
-         
-        if (navigator.getUserMedia) {       
-            navigator.getUserMedia({video: true}, handleVideo2, videoError);
-        }
-    }
-
-    function handleVideo2(stream) {
-        document.querySelector('#chair2 .chairscreen').src = window.URL.createObjectURL(stream);
+    function handleVideo(stream) {
+        document.querySelector('.chairscreen').src = window.URL.createObjectURL(stream);
     }
      
     function videoError(e) {

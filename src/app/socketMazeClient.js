@@ -238,6 +238,7 @@
         chairback.classList.add('chairback');
         chairseat.classList.add('chairseat');
         chairscreen.classList.add('chairscreen');
+        chairscreen.setAttribute('autoplay', true);
 
         // chair.style.boxShadow = generateBoxShadow(100, '1px', 'black');
         // chairback.style.boxShadow = generateBoxShadow(100, '1px', 'black');
