@@ -31,13 +31,13 @@
         }
 
         function turnRight() {
-            heading++;
+            heading+=2;
             heading = heading % 360;
             transformRoom();
         }
 
         function turnLeft() {
-            heading--;
+            heading-=2;
             while(heading < 0) {
                 heading += 360;
             }
@@ -142,10 +142,10 @@
             southWall.style.display='block'
         }
 
-        room.style.transformOrigin = '50% 50% 500px';
-        // room.style.transform = 'translateZ(-500px) rotateY(' + heading + 'deg)';
-        room.style.transform = 'rotateY(' + heading + 'deg)';
-        room.style.transform += 'translateZ(' + ((y)/21 * 1000) + 'px) translateX(' + ((x-11)/21*1000) + 'px)';
+        room.style.transformOrigin = '50% 50% 900px';
+        room.style.transform = 'translateZ(-900px) rotateY(' + heading + 'deg)';
+        // room.style.transform = 'rotateY(' + heading + 'deg)';
+        room.style.transform += 'translateZ(' + ((y)/21 * 1800) + 'px) translateX(' + ((x-11)/21*1800) + 'px)';
         // room.style.transform = 'translateZ(-500px) rotateY(' + heading + 'deg)';
         
 

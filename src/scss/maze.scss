@@ -55,8 +55,8 @@ div#room{
     position: absolute;
     top:0%;
     left:0%;
-    width:1000px;
-    height: 1000px;
+    width:1800px;
+    height: 1800px;
     margin: 0 auto;
     transform-style: preserve-3d;
 }
@@ -101,20 +101,20 @@ div#chat-input button{
 }
 div#roomContainer {
     perspective:500px;
-    perspective-origin: 500px 250px;
-    transform: translateZ(-500);
+    perspective-origin: 900px 540px;
+    transform: translateZ(-500px) translateY(-500px);
 }
 .wall, .floor, .ceiling {
     position: absolute;
-    height:500px;
-    width: 1000px;
+    height:1080px;
+    width: 1800px;
     top:0;
     left:0;
     background-color:#dddddd;
     border: 2px solid #000;
 }
 .floor, .ceiling {
-    background-image: url("/img/FloorGrateTiles.jpg");
+    background-image: url("/img/white_oak_natural.png");
     background-size: 100%;
 }
 .wall{
@@ -127,8 +127,8 @@ div#roomContainer {
         left: 0;
         right: 0;
         bottom: 0;
-        background: url("/img/tie-fighter.png") no-repeat;
-        background-size: cover;
+        background: rgba(0,0,255,0.1);
+        // background-size: cover;
         z-index: 1;
 
     }
@@ -139,8 +139,9 @@ div#roomContainer {
         left: 0;
         right: 0;
         bottom: 0;
-        background: url("/img/space.jpg");
+        background: url("/img/glass06.jpg");
         background-size: cover;
+        opacity: 0.1;
         z-index: -2;
     }
     &.west{
@@ -159,7 +160,7 @@ div#roomContainer {
     left: 40%;
     background-color: #000;
     z-index: 3;
-    transform:rotateY(-45deg) translateZ(-300px);
+    transform:rotateY(-45deg) translateZ(-300px) translateY(500px);
     iframe {
         background-color: #000;
         border: 10px solid #000;
@@ -168,52 +169,55 @@ div#roomContainer {
 
 .north.wall{
     // background-color:#dd0000;
-    transform: translateZ(-500px);
+    transform: translateZ(-900px);
     &:before {
         z-index: -1;
     }
 }
 .east.wall{
     // background-color:#00dd00;
-    transform:rotateY(90deg) translateZ(500px);
+    transform:rotateY(90deg) translateZ(900px);
 }
 .west.wall{
     // background-color:#0000dd;
-    transform:rotateY(-90deg) translateZ(500px);
+    transform:rotateY(-90deg) translateZ(900px);
 }
 .south.wall{
-    transform:rotateY(180deg) translateZ(-500px);
+    transform:rotateY(180deg) translateZ(-900px);
 }
 .floor{
-    transform:rotateX(-90deg);
+    transform:rotateX(-90deg) translateZ(180px);
     background-color: brown;
 }
 .ceiling{
-    transform:rotateX(90deg) translateZ(500px);
+    transform:rotateX(90deg) translateZ(900px);
     background-color: lightblue;
 }
 
 .floor, .ceiling {
-    width: 1000px;
-    height: 1000px;    
+    width: 1800px;
+    height: 1800px;    
 }
 
 .door {
+    position:absolute;
     height:569px;
     width: 909px;
-    margin: 0 auto;
+    // margin: 0 auto;
     background-image: url("/img/maxresdefault.jpg");
     background-size: cover;
     cursor: pointer;
     z-index: 1000000;
+    bottom:0;
+    left:446.5px;
 }
 
 .chair {
     transform-style: preserve-3d;
-    transform: translateY(200px);
+    transform: translateY(740px);
     cursor: pointer;
     &.chair2{
-            transform: rotateY(180deg) translateX(850px) translateZ(360px) translateY(-30px);
+            transform: rotateY(180deg) translateX(850px) translateZ(360px) translateY(470px);
     }
 }
 .chairseat {
