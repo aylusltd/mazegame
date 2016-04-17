@@ -134,17 +134,24 @@ div#roomContainer {
     background-position: 250% 50%; }
 
 .screen {
-  width: 20%;
-  height: 10%;
+  width: 800px;
+  height: 420px;
+  opacity: 0.5;
   position: absolute;
-  top: 10%;
-  left: 40%;
+  top: 320px;
+  left: 500px;
   background-color: #000;
   z-index: 3;
-  transform: rotateY(-45deg) translateZ(-300px) translateY(500px); }
+  backface-visibility: hidden;
+  transform: rotateY(-90deg); }
   .screen iframe {
     background-color: #000;
-    border: 10px solid #000; }
+    border: 10px solid #000;
+    height: 100%;
+    width: 100%; }
+
+.screen2 {
+  transform: rotateY(90deg); }
 
 .north.wall {
   transform: translateZ(-900px); }

@@ -261,6 +261,10 @@
         chair.appendChild(chairseat);
         chairback.appendChild(chairscreen);
         chair.id = "chair1";
+
+        var screen2 = screen.cloneNode(true);
+        screen2.classList.add('screen2');
+        room.appendChild(screen2);
         
         chair2 = chair.cloneNode(true);
         chair2.classList.add('chair2');
