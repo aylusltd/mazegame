@@ -291,12 +291,13 @@
 
 	        function makeChair(n){
 	            var c = chair.cloneNode(true);
-	            var x =[0,0, 185, 185, 555, 555];
-	            var z = [0,0, 780, 400, 780, 780];
+	            var x =[0,0, 185, 705, 555, 555];
+	            var z = [0,0, 780, -450, 780, 780];
 	            var r = [0,0, 45, -45, 45, -45];
+	            var y = [550,550,550,350,0,0];
 	            c.setAttribute('data-chair', n);
 	            c.addEventListener('click', video);
-	            c.style.transform="translateY(550px) translateZ("+z[n]+"px) translateX("+x[n]+"px) rotateY("+r[n]+"deg)";
+	            c.style.transform="translateY("+y[n]+"px) translateZ("+z[n]+"px) translateX("+x[n]+"px) rotateY("+r[n]+"deg)";
 	            room.appendChild(c);
 	        }
 
