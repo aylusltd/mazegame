@@ -14,11 +14,12 @@ var credentials = {
 
 app.use(express.static('dist'));
 
+var httpServer = require('http').createServer(app);
 var httpsServer = https.createServer(credentials, app);
 var io = require('socket.io')(httpsServer);
 
 var controller = new Controller(io, app);
 
-controller.initialize(httpsServer, 5000);
+controller.initialize(httpServer, process.env.PORT || 5000);
 
 
