@@ -206,6 +206,7 @@ var video = require('./video');
         southWall.classList.add('south');
 
         chair.classList.add('chair');
+        chair.setAttribute('data-chair', 1);
         chairback.classList.add('chairback');
         chairseat.classList.add('chairseat');
         chairscreen.classList.add('chairscreen');
@@ -239,12 +240,14 @@ var video = require('./video');
         
         chair2 = chair.cloneNode(true);
         chair2.classList.add('chair2');
+        chair2.setAttribute('data-chair', 2);
         chair2.id = "chair2";
         room.appendChild(chair2);
         x=11;
         y=11;
         transformRoom();
         chair.addEventListener('click', video);
+        chair2.addEventListener('click', video);
 
     });
 

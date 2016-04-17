@@ -1,6 +1,7 @@
 var Model = require('./Model');
 var redis = require('redis').createClient();
 var mongoose = require('mongoose');
+var webRTC = require('webrtc.io').listen(8001);
 
 var model = new Model();
 
