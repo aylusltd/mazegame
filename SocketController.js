@@ -1,6 +1,6 @@
 var Model = require('./Model');
-var redis = require('redis').createClient();
-var mongoose = require('mongoose');
+// var redis = require('redis').createClient();
+// var mongoose = require('mongoose');
 var webRTC = require('webrtc.io').listen(8001);
 
 var model = new Model();
@@ -148,20 +148,22 @@ module.exports = function Controller(io, app){
     });
 
     this.initialize = function initialize(server, port){
-        redis.on('ready', function(){
-            console.log('redis connected');
-            mongoose.connect('mongodb://localhost/b2');
-            var db = mongoose.connection;
-            db.on('open', function(){
-                console.log('mongo connected');
-                server.listen(port);
-                model.generate({
-                    x:0,
-                    y:0
-                });
-                console.log('server running');
-            });
-        });
+        // redis.on('ready', function(){
+        //     console.log('redis connected');
+        //     mongoose.connect('mongodb://localhost/b2');
+        //     var db = mongoose.connection;
+        //     db.on('open', function(){
+        //         console.log('mongo connected');
+        //         server.listen(port);
+        //         model.generate({
+        //             x:0,
+        //             y:0
+        //         });
+        //         console.log('server running');
+        //     });
+        // });
+        server.listen(port);
+        console.log('server running');
     }
 }
 
