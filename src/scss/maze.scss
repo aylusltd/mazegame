@@ -103,6 +103,7 @@ div#roomContainer {
     perspective:500px;
     perspective-origin: 900px 540px;
     transform: translateZ(-500px) translateY(-500px);
+    position:absolute;
 }
 .wall, .floor, .ceiling {
     position: absolute;
