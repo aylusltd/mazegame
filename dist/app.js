@@ -291,8 +291,8 @@
 
 	        function makeChair(n){
 	            var c = chair.cloneNode(true);
-	            var x =[0,0, 185, 185, 185, 185];
-	            var z = [0,0, -1085, -1085, -715, -715];
+	            var x =[0,0, 185, 185, 555, 555];
+	            var z = [0,0, 780, 400, 780, 780];
 	            var r = [0,0, 45, -45, 45, -45];
 	            c.setAttribute('data-chair', n);
 	            c.addEventListener('click', video);
